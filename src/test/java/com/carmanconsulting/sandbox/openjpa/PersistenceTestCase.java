@@ -7,16 +7,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jcarman
- * Date: 8/22/13
- * Time: 7:42 AM
- * To change this template use File | Settings | File Templates.
- */
-public class PersistenceTestCase
+public abstract class PersistenceTestCase
 {
+//----------------------------------------------------------------------------------------------------------------------
+// Fields
+//----------------------------------------------------------------------------------------------------------------------
+
     private EntityManager entityManager;
+
+//----------------------------------------------------------------------------------------------------------------------
+// Other Methods
+//----------------------------------------------------------------------------------------------------------------------
 
     @After
     public void commitTransaction()
@@ -31,5 +32,10 @@ public class PersistenceTestCase
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("openjpa");
         entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
+    }
+
+    protected EntityManager getEntityManager()
+    {
+        return entityManager;
     }
 }

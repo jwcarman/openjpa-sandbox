@@ -1,12 +1,29 @@
 package com.carmanconsulting.sandbox.openjpa;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jcarman
- * Date: 8/22/13
- * Time: 7:40 AM
- * To change this template use File | Settings | File Templates.
- */
-public class ExternalizedEntityTest
+import org.junit.Test;
+
+import java.net.InetAddress;
+
+import static org.junit.Assert.*;
+
+public class ExternalizedEntityTest extends PersistenceTestCase
 {
+//----------------------------------------------------------------------------------------------------------------------
+// Other Methods
+//----------------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void testPersisting() throws Exception
+    {
+        ExternalizedFieldEntity entity = new ExternalizedFieldEntity();
+        final InetAddress address = InetAddress.getByName("192.168.1.1");
+        entity.setInetAddress(address);
+        getEntityManager().persist(entity);
+        getEntityManager().flush();
+        getEntityManager().clear();
+        ExternalizedFieldEntity found = getEntityManager().find(ExternalizedFieldEntity.class, entity.getId());
+        assertNotNull(found);
+        assertNotSame(entity, found);
+        assertEquals(address, found.getInetAddress());
+    }
 }

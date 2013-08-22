@@ -1,0 +1,16 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="1.0">
+    <persistence-unit name="openjpa">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <class>com.carmanconsulting.sandbox.openjpa.UuidEntity</class>
+        <class>com.carmanconsulting.sandbox.openjpa.ExternalizedFieldEntity</class>
+        <properties>
+            <property name="openjpa.ConnectionURL" value="jdbc:hsqldb:mem:openjpa-sandbox"/>
+            <property name="openjpa.ConnectionDriverName" value="org.hsqldb.jdbcDriver"/>
+            <property name="openjpa.ConnectionUserName" value="sa"/>
+            <property name="openjpa.ConnectionPassword" value=""/>
+            <property name="openjpa.Log" value="slf4j"/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+        </properties>
+    </persistence-unit>
+</persistence>

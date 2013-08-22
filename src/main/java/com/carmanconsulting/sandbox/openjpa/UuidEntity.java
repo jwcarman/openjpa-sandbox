@@ -1,19 +1,22 @@
 package com.carmanconsulting.sandbox.openjpa;
 
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.UUID;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jcarman
- * Date: 8/22/13
- * Time: 7:37 AM
- * To change this template use File | Settings | File Templates.
- */
-public class UuidEntity
+@MappedSuperclass
+public abstract class UuidEntity
 {
+//----------------------------------------------------------------------------------------------------------------------
+// Fields
+//----------------------------------------------------------------------------------------------------------------------
+
     @Id
     private String id = UUID.randomUUID().toString();
+
+//----------------------------------------------------------------------------------------------------------------------
+// Getter/Setter Methods
+//----------------------------------------------------------------------------------------------------------------------
 
     public String getId()
     {
@@ -25,6 +28,10 @@ public class UuidEntity
         this.id = id;
     }
 
+//----------------------------------------------------------------------------------------------------------------------
+// Canonical Methods
+//----------------------------------------------------------------------------------------------------------------------
+
     @Override
     public boolean equals(Object o)
     {
@@ -32,12 +39,12 @@ public class UuidEntity
         {
             return true;
         }
-        if (!(o instanceof ExternalizedFieldEntity))
+        if (!(o instanceof UuidEntity))
         {
             return false;
         }
 
-        ExternalizedFieldEntity that = (ExternalizedFieldEntity) o;
+        UuidEntity that = (UuidEntity) o;
 
         if (!id.equals(that.id))
         {
